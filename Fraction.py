@@ -2,8 +2,8 @@ import pylab as pl
 import random
 import math
 
-N = 50 # the length of sides of a grid
-simulations = 5
+N = 100 # the length of sides of a grid
+simulations = 50
 P = pl.linspace(0.66,0.7,5) # a list to record different Ps
 Fraction = [0.0]*len(P) # a list to record different fractions
 Pc = 0.6
