@@ -39,7 +39,7 @@ for n in N:
     Pc.append(Pc_n/float(n**2*50))
 
 #save
-np.savetxt('pc.txt',Pc)
+pl.savetxt('pc.txt',Pc)
 #Pc=np.loadtxt('pc.txt')
         
 #plot
