@@ -23,8 +23,6 @@ for n in N:
             Ranm = random.randint(0,n**2-1) # generate a random number
             x = Ranm/n+1 # xth-row
             y = Ranm%n+1# yth-column
-            s.append(x)
-            t.append(y)
             if grid[x,y] == 0: # check whether the site (x,y) is empty
                 clusnum += 1
                 grid[x,y] = clusnum # put a point at site (x,y)
@@ -34,6 +32,8 @@ for n in N:
                     for (i,j) in zip(s,t): 
                         if pl.any(Neighbor==grid[i,j]):
                             grid[i,j] = clusnum
+                s.append(x)
+                t.append(y)
             Check = [clusnum-max(grid[0,:]),clusnum-max(grid[n+1,:]),clusnum-max(grid[:,0]),clusnum-max(grid[:,n+1])]
         Pc_n += n**2+4-sum(sum(grid[i,:]==0) for i in range(n+2))
     Pc.append(Pc_n/float(n**2*50))
