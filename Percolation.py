@@ -16,8 +16,6 @@ while pl.any(Check):
     Ranm = random.randint(0,N**2-1) # generate a random number
     x = Ranm/N+1 # xth-row
     y = Ranm%N+1# yth-column
-    s.append(x)
-    t.append(y)
     if grid[x,y] == 0: # check whether the site (x,y) is empty
         clusnum += 1
         grid[x,y] = clusnum # put a point at site (x,y)
@@ -26,6 +24,8 @@ while pl.any(Check):
             for (i,j) in zip(s, t): 
                 if pl.any(Neighbor==grid[i,j]):
                     grid[i,j] = clusnum
+        s.append(x)
+        t.append(y)
     Check = [clusnum-max(grid[0,:]),clusnum-max(grid[N+1,:]),clusnum-max(grid[:,0]),clusnum-max(grid[:,N+1])]
 
 counter = 0
