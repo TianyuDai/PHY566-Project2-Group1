@@ -37,6 +37,10 @@ for n in range(len(N)):
             Check = [clusnum-max(grid[0,:]),clusnum-max(grid[N[n]+1,:]),clusnum-max(grid[:,0]),clusnum-max(grid[:,N[n]+1])]
         Pc[n] += (clusnum-4*N[n])/float(N[n]**2*simulations)
 
+#save
+np.savetxt('pc.txt',Pc)
+#Pc=np.loadtxt('pc.txt')
+        
 #plot
 inverseN = [1.0/k for k in N]
 pl.plot(inverseN,Pc,'o-b')
