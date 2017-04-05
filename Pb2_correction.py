@@ -3,16 +3,16 @@ import random
 import math
 
 N = 50 # the length of sides of a grid
-simulations = 5
+simulations = 5 # number of simulation times
 P = pl.linspace(0.65,0.7,6) # a list to record different Ps
 Fraction = [] # a list to record different fractions
 Pc = 0.6
 # loop
 for p in P:
-    print p
+    print p #to show the running process
     counter=0
     for m in range(simulations):
-        print m
+        print m #to show the running process
         grid = pl.zeros([N+2,N+2]) # generate an empty grid
         grid[1:(N+1),0] = pl.linspace(1,N,N) # boundary condition
         grid[0,1:(N+1)] = pl.linspace(N+1,2*N,N)
@@ -42,11 +42,11 @@ for p in P:
                 
         counter+=sum(sum((grid[i,:]==judge) for i in range(1,N+1))[j] for j in range(1,N+1))# number of sites in spanning cluster          
     Fraction.append(counter/float(N**2*p*simulations))
-deltaP = [Pn-Pc for Pn in P]
+deltaP = [Pn-Pc for Pn in P] # store data to get x coordinates later
 
 pl.savetxt('Fraction_1.txt',Fraction)
 
-pl.plot([math.log(i) for i in deltaP],[math.log(j) for j in Fraction],'o-b')         
+pl.plot([math.log(i) for i in deltaP],[math.log(j) for j in Fraction],'o-b')   #plot the log(F)-log(P-Pc) graph     
 pl.title('Fraction N=%d' %N) 
 pl.xlabel('$log(P-Pc)$') 
 pl.ylabel('$log(F)$') 
