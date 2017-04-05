@@ -1,10 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Apr 04 01:23:22 2017
-
-@author: Yuheng Liao
-"""
-
 import pylab as pl  
 import random
 import math
@@ -43,21 +36,19 @@ for p in P:
                 t.append(y)
             Check = [clusnum-max(grid[0,:]),clusnum-max(grid[N+1,:]),clusnum-max(grid[:,0]),clusnum-max(grid[:,N+1])]   
             if not pl.any(Check):
-                judge = clusnum
-                
+                judge = clusnum                
 #        counter = sum(sum(grid[i,:]==judge) for i in range(1,N+1)) # number of sites in spanning cluster
-        counter =0
+        counter = 0
         for i in range(1,N+1):
             for j in range(1,N+1):
-                if grid[i,j]==judge:
-                    counter=counter+1
-        fortest= counter/float(N**2*p)
-        print fortest         
-        Fraction[cont]=Fraction[cont]+(counter/float(N**2*p*simulations))
-    cont +=1
-deltaP = [Pn-Pc for Pn in P]
+                if grid[i,j] == judge:
+                    counter += 1 # number of sites in spanning cluster          
+        Fraction[cont] += (counter/float(N**2*p*simulations))
+    cont += 1
 
 pl.savetxt('Fraction_1.txt',Fraction)
+
+deltaP = [Pn-Pc for Pn in P]
 
 pl.plot([math.log(i) for i in deltaP],[math.log(j) for j in Fraction],'o-b')         
 pl.title('Fraction N=%d' %N) 
