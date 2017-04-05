@@ -28,13 +28,15 @@ while pl.any(Check):
         t.append(y)
     Check = [clusnum-max(grid[0,:]),clusnum-max(grid[N+1,:]),clusnum-max(grid[:,0]),clusnum-max(grid[:,N+1])]
 
-counter = 0
 for i in range(1,N+1):
-    for j in range(1,N+1):
-        Percolation[i-1,j-1]=grid[i,j]         
-pl.imshow(Percolation, cmap='gist_yarg')
+    for j in range(1,N+1): 
+        if grid[i,j]: 
+            Percolation[i-1,j-1]=(int)(grid[i,j]/clusnum)
+        else: 
+            Percolation[i-1,j-1]=-1      
+pl.imshow(Percolation, interpolation='none', cmap='gist_yarg')
 pl.title('Percolation N=%d' %N) 
 pl.xlabel('x') 
 pl.ylabel('y') 
-pl.savefig('percolation_7.pdf') 
+pl.savefig('percolation_%d.pdf'%N) 
 pl.show()
