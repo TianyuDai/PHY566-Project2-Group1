@@ -5,7 +5,7 @@ import math
 N = 50 # the length of sides of a grid
 simulations = 5
 P = pl.linspace(0.65,0.7,6) # a list to record different Ps
-Fraction = [0.0]*len(P) # a list to record different fractions
+Fraction = [] # a list to record different fractions
 Pc = 0.6
 cont=0
 # loop
@@ -41,8 +41,7 @@ for p in P:
                 judge = clusnum
                 
         counter=sum(sum((grid[i,:]==judge) for i in range(1,N+1))[j] for j in range(1,N+1))# number of sites in spanning cluster          
-        Fraction[cont] += (counter/float(N**2*p*simulations))
-    cont +=1
+        Fraction.append(counter/float(N**2*p*simulations))
 deltaP = [Pn-Pc for Pn in P]
 
 pl.savetxt('Fraction_1.txt',Fraction)
