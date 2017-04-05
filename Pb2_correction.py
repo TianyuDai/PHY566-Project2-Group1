@@ -7,10 +7,10 @@ simulations = 5
 P = pl.linspace(0.65,0.7,6) # a list to record different Ps
 Fraction = [] # a list to record different fractions
 Pc = 0.6
-cont=0
 # loop
 for p in P:
     print p
+    counter=0
     for m in range(simulations):
         print m
         grid = pl.zeros([N+2,N+2]) # generate an empty grid
@@ -40,8 +40,8 @@ for p in P:
             if not pl.any(Check):
                 judge = clusnum
                 
-        counter=sum(sum((grid[i,:]==judge) for i in range(1,N+1))[j] for j in range(1,N+1))# number of sites in spanning cluster          
-        Fraction.append(counter/float(N**2*p*simulations))
+        counter+=sum(sum((grid[i,:]==judge) for i in range(1,N+1))[j] for j in range(1,N+1))# number of sites in spanning cluster          
+    Fraction.append(counter/float(N**2*p*simulations))
 deltaP = [Pn-Pc for Pn in P]
 
 pl.savetxt('Fraction_1.txt',Fraction)
