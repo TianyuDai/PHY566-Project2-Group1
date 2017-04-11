@@ -3,9 +3,9 @@ import random
 import time
 time1 = time.time()
 
-N = [5,10,15,20,30,50,80] # the length of sides of a grid
-Pc = [0.0]*len(N) # a list to record critical concentrations of different grids
-inverse[N] = [0.0]*len(N) # a list to record 1/N
+N = [5,10,15]#,20,30,50,80] # the length of sides of a grid
+Pc = [] # a list to record critical concentrations of different grids
+inverseN = [] # a list to record 1/N
 for n in N:
     Pc_n = 0
     for m in range(50):
@@ -34,12 +34,9 @@ for n in N:
                 t.append(y)
             Check = [clusnum-max(grid[0,:]),clusnum-max(grid[n+1,:]),clusnum-max(grid[:,0]),clusnum-max(grid[:,n+1])] # decide when to stop the loop
         Pc_n += n**2+4-sum(sum(grid[i,:]==0) for i in range(n+2))
-    Pc[n] = Pc_n/float(n**2*50)
-    inverseN[n] = 1.0/N
+    Pc.append(Pc_n/float(n**2*50))
+    inverseN.append(1.0/n)
 
-#save
-pl.savetxt('Pc.txt',Pc)
-        
 #plot
 time2 = time.time()
 pl.plot(inverseN,Pc,'-bo')

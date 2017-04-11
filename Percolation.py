@@ -1,7 +1,7 @@
 import pylab as pl  
 import random 
 
-N = 80 # the length of sides of a grid
+N = 20 # the length of sides of a grid
 grid = pl.zeros([N+2,N+2]) # generate an empty grid to deal with boundary conditions
 grid[1:(N+1),0] = pl.linspace(1,N,N) # label each boundary site with a number
 grid[0,1:(N+1)] = pl.linspace(N+1,2*N,N) # label each boundary site with a number
