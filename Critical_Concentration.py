@@ -3,15 +3,14 @@ import random
 import time
 time1 = time.time()
 
-N = [5,10,15,20,] # the length of sides of a grid
-Pc = []
-
+N = [5,10,15,20,30,50,80] # the length of sides of a grid
+Pc = [0.0]*len(N) # a list to record critical concentrations of different grids
+inverse[N] = [0.0]*len(N) # a list to record 1/N
 for n in N:
     Pc_n = 0
     for m in range(50):
         grid = pl.zeros([n+2,n+2]) # generate an empty grid
-        # boundary condition
-        grid[1:(n+1),0] = pl.linspace(1,n,n)
+        grid[1:(n+1),0] = pl.linspace(1,n,n) # boundary condition
         grid[0,1:(n+1)] = pl.linspace(n+1,2*n,n)
         grid[1:(n+1),n+1] = pl.linspace(2*n+1,3*n,n)
         grid[n+1,1:(n+1)] = pl.linspace(3*n+1,4*n,n)
@@ -27,24 +26,22 @@ for n in N:
                 clusnum += 1
                 grid[x,y] = clusnum # put a point at site (x,y)
                 Neighbor = [grid[x-1,y],grid[x+1,y],grid[x,y-1],grid[x,y+1]]
-                # check neighbering sites
-                if max(grid[x-1,y],grid[x+1,y],grid[x,y-1],grid[x,y+1]):
+                if max(grid[x-1,y],grid[x+1,y],grid[x,y-1],grid[x,y+1]): # check neighboring sites
                     for (i,j) in zip(s,t): 
                         if pl.any(Neighbor==grid[i,j]):
                             grid[i,j] = clusnum
                 s.append(x)
                 t.append(y)
-            Check = [clusnum-max(grid[0,:]),clusnum-max(grid[n+1,:]),clusnum-max(grid[:,0]),clusnum-max(grid[:,n+1])]
+            Check = [clusnum-max(grid[0,:]),clusnum-max(grid[n+1,:]),clusnum-max(grid[:,0]),clusnum-max(grid[:,n+1])] # decide when to stop the loop
         Pc_n += n**2+4-sum(sum(grid[i,:]==0) for i in range(n+2))
-    Pc.append(Pc_n/float(n**2*50))
+    Pc[n] = Pc_n/float(n**2*50)
+    inverseN[n] = 1.0/N
 
 #save
-pl.savetxt('pc.txt',Pc)
-#Pc=np.loadtxt('pc.txt')
+pl.savetxt('Pc.txt',Pc)
         
 #plot
 time2 = time.time()
-inverseN = [1.0/5,1.0/10,1.0/15]
 pl.plot(inverseN,Pc,'-bo')
 pl.title('Critical Concentration\nCalculation Time = %.2fs' % (time2-time1)) 
 pl.xlabel('$1/N$') 
