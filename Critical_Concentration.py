@@ -3,7 +3,7 @@ import random
 import time
 time1 = time.time()
 
-N = [5,10,15]#,20,30,50,80] # the length of sides of a grid
+N = [5,10,15,20,30,50,80] # the length of sides of a grid
 Pc = [] # a list to record critical concentrations of different grids
 inverseN = [] # a list to record 1/N
 for n in N:
