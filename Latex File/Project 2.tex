@@ -44,45 +44,37 @@ Then, follow below steps:
   \item Select and occupy a random site from the lattice and label it as $4N+1+n$, which can distinguish it from the boundary. n is the step number. 
   \item Store the cluster number of four nearest sites. 
   \item Transverse all the occupied sites(including boundary sites). Relabel all sites which has the same cluster number as nearest sites to be the newest cluster number $4N+1+n$. \\
-        The lattice before transverse and after transverse is shown in Fig. (\ref{Boundary2}) and Fig. (\ref{Boundary3}). 
-  \item If the maximum label on each boundary is the same as the newest cluster number, the spanning cluster shows up. The appearance of spanning cluster in the lattice is shown in Fig. (\ref{Spanning1}) and the spanning cluster is Fig. (\ref{Spanning2}). 
+        The lattice before transverse and after transverse is shown in Fig. (\ref{Boundary2}). 
+  \item If the maximum label on each boundary is the same as the newest cluster number, the spanning cluster shows up. The appearance of spanning cluster in the lattice and the spanning cluster is Fig. (\ref{Spanning}). 
   \item Repeat steps from the beginning. 
 \end{enumerate}
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.4\textwidth]{Boundary2}
-\caption{Cluster labels before the transverse}
-\label{Boundary2}
 \includegraphics[width=0.4\textwidth]{Boundary3}
-\caption{Cluster labels after the transverse}
-\label{Boundary3}
+\caption{Cluster labels before and after the transverse}
+\label{Boundary2}
 \end{figure}
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.4\textwidth]{Spanning1}
-\caption{The appearance of spanning cluster on lattice}
-\label{Spanning1}
 \includegraphics[width=0.4\textwidth]{Spanning2}
 \caption{The spanning cluster}
-\label{Spanning2}
+\label{Spanning}
 \end{figure}
 
-The revised algorithm avoid dealing with boundary conditions. When the newest added site reaches the boundary, the lattice before and after transverse is shown in Fig. (\ref{Boundary4}) and Fig. (\ref{Boundary5})\\
+The revised algorithm avoid dealing with boundary conditions. When the newest added site reaches the boundary, the lattice before and after transverse is shown in Fig. (\ref{Boundary3}). \\
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.4\textwidth]{Boundary4}
-\caption{Newest added site reaches the boundary, before the transverse}
-\label{Boundary4}
 \includegraphics[width=0.4\textwidth]{Boundary5}
-\caption{Newest added site reaches the boundary, after the transverse}
-\label{Boundary5}
+\caption{Newest added site reaches the boundary, before and after the transverse}
+\label{Boundary3}
 \end{figure}
 The judge of how many nearest sites are occupied is also avoided. After each transverse, all cluster connected to the newest added site will be updated in each step. \\
 Following the steps above, we can get the spanning clusters for different $N\in\{5, 10, 15, 20, 30, 50, 80\}$ as below:
-\clearpage
 \begin{figure}[H]%[!htb]
-
 \minipage{0.5\textwidth}
   \includegraphics[width=\linewidth]{percolation_5.pdf}
   \label{delta02}
@@ -99,6 +91,9 @@ Following the steps above, we can get the spanning clusters for different $N\in\
   \includegraphics[width=\linewidth]{percolation_20.pdf}
   \label{delta02}
 \endminipage\hfill
+\end{figure}
+\clearpage
+\begin{figure}[h]
 \minipage{0.5\textwidth}
   \includegraphics[width=\linewidth]{percolation_30.pdf}
   \label{delta02}
@@ -107,19 +102,31 @@ Following the steps above, we can get the spanning clusters for different $N\in\
   \includegraphics[width=\linewidth]{percolation_50.pdf}
   \label{delta02}
 \endminipage\hfill
-  \caption{First Appearance of Spanning Clusters for Different Lattices}
-\end{figure}
-\begin{figure}[H]
 \minipage{0.5\textwidth}
   \includegraphics[width=\linewidth]{percolation_80.pdf}
   \label{delta02}
 \endminipage\hfill
+  \caption{First Appearance of Spanning Clusters for Different Lattices}
 \end{figure}
 In the pictures above, black sites represent sites of spanning clusters, gray ones represent sites occupied while not belonging to spanning clusters, and white ones represent sites unoccupied.\\
-\indent By repeating the procedures over 50 times for each $N$, we can calculate the average $p_c(N^{-1})$. After doing so for all $N\in\{5, 10, 15, 20, 30, 50, 80\}$, we could pplot the graph of $p_c(N^{-1})$ as below:
+\indent By repeating the procedures over 50 times for each $N$, we can calculate the average $p_c(N^{-1})$. After doing so for all $N\in\{5, 10, 15, 20, 30, 50, 80\}$, we could plot the graph of $p_c(N^{-1})$ as Fig. (\ref{Critical}):
 \begin{figure}[H]
 \includegraphics{Critical.pdf}
+\caption{Critical Concentration}
+\label{Critical}
 \end{figure}
 According to the graph, we could extrapolate to the infinite size limit $p_c(0)\approx0.602$.
-\section{(b)}
+\section{Spanning Cluster Size for Different Lattice}
+We define the fraction F of a as
+$$F\left(p>p_c\right)=\frac{no.\,of\,sites\,in\,spanning\,cluster}{no.\,of\,occupied\,sites}$$
+The procedure of finding the fraction for a certain p is similar to the procedure of finding the critical probability $p_c$. However, the condition to break the loop is not the appearance of the spanning cluster, but the number of occupied sites over the number of all the sites is p. When the spanning cluster first appears, we store the cluster number of the spanning cluster. After the iteration, calculate the number of spanning cluster. The occupied number is calculated by $p\times N\times N$. \\
+The whole procedure is repeated for 50 times and then calculate average fraction F. In a lattice with fixed size $(100\times100)$, we plot the fraction F for different probability p in Fig. (\ref{Fraction}). The power law ansatz is 
+$$F=F_0\left(p-p_c\right)^\beta$$
+By plotting the logarithm for each side and extracting the slope of a straight-line fit, the index $\beta$ can be calculated as in Fig. (\ref{Fraction}). The calculated $\beta$ is 0.1305, which is close to the theoretical value $\frac{5}{36}$. 
+\begin{figure}[H]
+\centering
+  \includegraphics[width=0.8\textwidth]{fraction_all.pdf}
+  \label{Fraction}
+  \caption{Fraction Plot and Linear Fitting}
+\end{figure}
 \end{document}
