@@ -1,6 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import math
+## For time saving consideration, we separete the calculation to 4 part. (0.61-0.635,0.64-0.67,0.675-0.7,0.705-0.71)
+## Therefore, we store data in 4 txt files.
 N=100
 f1=np.loadtxt('0.61-0.635.txt')   # load data from txt
 f2=np.loadtxt('0.64-0.67.txt')
