@@ -2,26 +2,26 @@ import numpy as np
 import matplotlib.pyplot as plt
 import math
 N=100
-f1=np.loadtxt('0.61-0.635.txt')
+f1=np.loadtxt('0.61-0.635.txt')   # load data from txt
 f2=np.loadtxt('0.64-0.67.txt')
 f3=np.loadtxt('0.675-0.7.txt')
 f4=np.loadtxt('0.705-0.71.txt')
-f5=np.append(f1,f2)
+f5=np.append(f1,f2)              # combine all the data
 f5=np.append(f5,f3)
 f5=np.append(f5,f4)
-delta=np.linspace(0.61,0.71,21)
-delta=delta-0.6
-#deltat=np.linspace(0.61,0.635,6)
-ff5=np.log(f5)
-deltaP=np.log(delta)
-slope=np.polyfit(deltaP,ff5,1)
-crv=np.poly1d(slope)
+delta=np.linspace(0.61,0.71,21)   
+delta=delta-0.6                  # calculate (P-Pc)
+#deltat=np.linspace(0.61,0.635,6)  
+ff5=np.log(f5)                   # calculate ff5 = log(P)
+deltaP=np.log(delta)             # calculate deltaP = log(P-Pc)
+slope=np.polyfit(deltaP,ff5,1)   # fit (deltaP,ff5) into equation log(P)=beta*log(P-Pc)+log(P0)
+crv=np.poly1d(slope)             # get fitting equation
 print crv
-F0=np.exp(slope[1])
-beta=slope[0]
-y=crv(deltaP)
-plt.plot(deltaP,ff5,'o-b')
-plt.plot(deltaP,y,'r')
+P0=np.exp(slope[1])              # calculate P0
+beta=slope[0]                    # calculate beta
+y=crv(deltaP)                    # calculate fitting curve
+plt.plot(deltaP,ff5,'o-b')       # plot data curve
+plt.plot(deltaP,y,'r')           # plot fitting curve
 equation = 'y = ' + str(round(slope[0],4)) + 'x' ' + ' + str(round(slope[1],4))         
 plt.plot()
 plt.title('Fraction N=%d' %N) 
