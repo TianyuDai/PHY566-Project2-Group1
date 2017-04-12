@@ -4,7 +4,7 @@ import math
 
 N = 50 # the length of sides of a grid
 simulations = 50 # number of simulation times
-P = pl.linspace(0.65,0.7,6) # a list to record different Ps
+P = pl.linspace(0.61,0.71,21) # a list to record different Ps
 Fraction = [] # a list to record different fractions
 Pc = 0.6
 # loop
