@@ -3,7 +3,7 @@ import random
 import math
 
 N = 50 # the length of sides of a grid
-simulations = 5 # number of simulation times
+simulations = 50 # number of simulation times
 P = pl.linspace(0.65,0.7,6) # a list to record different Ps
 Fraction = [] # a list to record different fractions
 Pc = 0.6
@@ -33,15 +33,15 @@ for p in P:
                 if max(grid[x-1,y],grid[x+1,y],grid[x,y-1],grid[x,y+1]): # check neighbering sites
                      for (i,j) in zip(s,t):
                         if pl.any(Neighbor==grid[i,j]):
-                            grid[i,j] = clusnum
+                            grid[i,j] = clusnum     # change the mark of all occupied sites connecting to this point to be the new number
                 s.append(x)
                 t.append(y)
             Check = [clusnum-max(grid[0,:]),clusnum-max(grid[N+1,:]),clusnum-max(grid[:,0]),clusnum-max(grid[:,N+1])]   
             if not pl.any(Check):
-                judge = clusnum
+                judge = clusnum  # keep tracking the number of spanning cluster
                 
-        counter+=sum(sum((grid[i,:]==judge) for i in range(1,N+1))[j] for j in range(1,N+1))# number of sites in spanning cluster          
-    Fraction.append(counter/float(N**2*p*simulations))
+        counter+=sum(sum((grid[i,:]==judge) for i in range(1,N+1))[j] for j in range(1,N+1))# number of sites in spanning cluster (store the total spanning cluster sites in 50 literations)         
+    Fraction.append(counter/float(N**2*p*simulations))   # store F for each P
 deltaP = [Pn-Pc for Pn in P] # store data to get x coordinates later
 
 pl.savetxt('Fraction_1.txt',Fraction)
